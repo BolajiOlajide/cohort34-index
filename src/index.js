@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import GetCharacter from './components/GetCharacters';
+import { Provider } from 'react-redux';
+import configureStore from './store';
+
+const store = configureStore({});
 
 const Main = () => {
   return (
-    <div>
-      <h1>My app is working!</h1>
-    </div>
+    <Provider store={store}>
+      <GetCharacter />
+    </Provider>
   );
 };
 
