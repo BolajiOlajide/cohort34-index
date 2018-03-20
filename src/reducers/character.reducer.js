@@ -7,7 +7,8 @@ const initialState = {
 
 
 const getCharacters = (state = initialState, action) => {
-  switch (action.types) {
+  console.log(action)
+  switch (action.type) {
     case GET_CHARACTERS: {
       return {
         ...state,
