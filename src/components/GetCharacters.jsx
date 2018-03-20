@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 import characterAction from '../actions/characterAction';
 
@@ -7,27 +8,52 @@ import characterAction from '../actions/characterAction';
 class GetCharacter extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      characters: []
+    };
   }
 
   componentWillMount() {
     this.props.getCharacters();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+    this.setState({ characters: nextProps.characters.characters });
+  }
+
 
   render() {
+    const { characters } = this.state;
+    const names = characters.map(character =>
+      <div className='character' key={character.id}>
+        <img src={character.image}/>
+        <Link to={{
+          pathname: '/character',
+          state: { character }
+        }}>
+          {character.name}
+        </Link>
+        <p>{character.species}</p>
+        <p>{character.gender}</p>
+      </div>
+    );
     return (
-      <div> Hello world </div>
+      <div className='grid'>
+        {names}
+      </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  getCharacters: () => dispatch(characterAction());
+  return {
+    getCharacters: () => dispatch(characterAction())
+  }
 }
 
 const mapStateToProps = (state) => ({
-  characters: state.characters
+  characters: state.character
 })
 
-export default connect(null, mapDispatchToProps)(GetCharacter)
+export default connect(mapStateToProps, mapDispatchToProps)(GetCharacter)

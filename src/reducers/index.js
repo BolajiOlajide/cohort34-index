@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import getCharacter from './getCharacters';
+import getCharacter from './character.reducer';
 
 const rootReducer = combineReducers({
   character: getCharacter
