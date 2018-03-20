@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import GetCharacter from './components/GetCharacters';
+import App from './components/App';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 
@@ -9,7 +9,7 @@ const store = configureStore({});
 const Main = () => {
   return (
     <Provider store={store}>
-      <GetCharacter />
+      <App />
     </Provider>
   );
 };
