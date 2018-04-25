@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom'
 
 import characterAction from '../actions/characterAction';
 
+import DynamicImport from './DynamicImport';
+
+
+const AllIsWell = (props) => (
+  <DynamicImport load={() => import(/* webpackChunkName: "alliswell" */ './AllIsWell')}>
+    {(Component) => Component === null
+      ? <p>Loading</p>
+      : <Component {...props} />}
+  </DynamicImport>
+);
+
 
 class GetCharacter extends React.Component {
   constructor() {
@@ -25,7 +36,6 @@ class GetCharacter extends React.Component {
 
   render() {
     const { characters } = this.state;
-    console.log(this.props.children);
     const names = characters.map(character =>
       <div className='character' key={character.id}>
         <img src={character.image}/>
@@ -41,6 +51,7 @@ class GetCharacter extends React.Component {
     );
     return (
       <div className='grid'>
+        <AllIsWell />
         {names}
       </div>
     );

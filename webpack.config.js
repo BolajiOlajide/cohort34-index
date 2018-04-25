@@ -5,7 +5,8 @@ module.exports = {
   entry: './src/index',
   output: {
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
+    chunkFilename: '[name].chunk.js'
   },
   devtool: 'eval',
   devServer: {
