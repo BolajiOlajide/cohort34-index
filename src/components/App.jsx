@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import GetCharacter from './GetCharacters';
-import Character from './Character';
+import DynamicImport from './DynamicImport';
+
+const GetCharacter = (props) => (
+  <DynamicImport load={() => import('./GetCharacters')}>
+    {(Component) => Component === null
+      ? <p>Loading</p>
+      : <Component {...props} />}
+  </DynamicImport>
+);
+
+const Character = (props) => (
+  <DynamicImport load={() => import('./Character')}>
+    {(Component) => Component === null
+      ? <p>Loading</p>
+      : <Component {...props} />}
+  </DynamicImport>
+)
 
 class App extends Component {
   render() {

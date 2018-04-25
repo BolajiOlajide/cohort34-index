@@ -25,6 +25,7 @@ class GetCharacter extends React.Component {
 
   render() {
     const { characters } = this.state;
+    console.log(this.props.children);
     const names = characters.map(character =>
       <div className='character' key={character.id}>
         <img src={character.image}/>
